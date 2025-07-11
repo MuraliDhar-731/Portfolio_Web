@@ -1,3 +1,4 @@
+/* Global Styles */
 body {
   font-family: 'Bookman Old Style', serif;
   background: url('assets/ocean-background.png') no-repeat center center fixed;
@@ -10,6 +11,7 @@ body {
   padding-bottom: 120px;
 }
 
+/* Header */
 header {
   background: linear-gradient(135deg, #2dd6a7, #86f1d0);
   padding: 3rem 1rem;
@@ -51,13 +53,16 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* Section Styling - Ocean Soft Transparency */
 section {
-  background: rgba(0, 50, 50, 0.8);
+  background: rgba(173, 216, 230, 0.15);
   margin: 2rem auto;
   padding: 2rem;
   max-width: 850px;
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: transform 0.3s ease;
 }
 
@@ -65,9 +70,10 @@ section:hover {
   transform: scale(1.01);
 }
 
+/* Headings */
 h2 {
-  color: #aefee2;
-  border-bottom: 2px solid #78eecf;
+  color: #d4fdf4;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
   padding-bottom: 0.5rem;
   font-weight: 800;
   font-size: 1.8rem;
@@ -79,6 +85,7 @@ ul li {
   font-weight: 600;
 }
 
+/* Footer */
 footer {
   background: #002e2e;
   color: #ccffee;
@@ -89,40 +96,37 @@ footer {
   letter-spacing: 0.5px;
 }
 
-/* Ocean Waves */
-.ocean {
+/* CSS-only Animated Ocean Waves */
+.ocean-waves {
   position: fixed;
   bottom: 0;
-  left: 0;
   width: 100%;
   height: 120px;
   overflow: hidden;
   z-index: 5;
 }
 
-.wave {
-  background: url('assets/wave.svg') repeat-x;
+.wave1,
+.wave2 {
   position: absolute;
-  top: -100px;
+  bottom: 0;
   width: 200%;
   height: 100px;
-  opacity: 0.6;
-  animation: waveAnimation 10s linear infinite;
-}
-
-.ocean .wave:nth-of-type(2) {
-  top: -95px;
-  animation: waveAnimation 15s linear infinite;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.2) 20%, transparent 70%) repeat-x;
+  background-size: 50% 100%;
   opacity: 0.4;
+  animation: waveSlide 10s linear infinite;
 }
 
-@keyframes waveAnimation {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.wave2 {
+  bottom: 10px;
+  opacity: 0.2;
+  animation: waveSlide 15s linear infinite reverse;
+}
+
+@keyframes waveSlide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 @keyframes fadeInDown {
