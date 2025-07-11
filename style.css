@@ -1,48 +1,59 @@
-/* Base styles */
+/* Global Styles */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f4f8fb;
+  font-family: 'Bookman Old Style', serif;
+  background: #1e1e2f;
+  color: #f3e9d2;
   margin: 0;
-  color: #333;
   scroll-behavior: smooth;
 }
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #0061ff, #60efff);
-  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #b9a9e3, #fbc2eb);
+  padding: 3rem 1rem;
   text-align: center;
-  color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #1e1e2f;
 }
 
 header h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
   animation: fadeInDown 1s ease;
 }
 
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: -10px;
+  color: #2a2a3b;
+}
+
 nav a {
-  color: white;
-  margin: 0 15px;
+  color: #1e1e2f;
+  margin: 0 12px;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #fefefe;
+  color: #3f2b96;
   text-decoration: underline;
 }
 
-/* Section cards */
+/* Sections */
 section {
-  background: white;
+  background: #2c2c3e;
   margin: 2rem auto;
   padding: 2rem;
   max-width: 850px;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
   transition: transform 0.3s ease;
 }
 
@@ -51,8 +62,8 @@ section:hover {
 }
 
 h2 {
-  color: #0061ff;
-  border-bottom: 2px solid #eee;
+  color: #dec9f5;
+  border-bottom: 2px solid #444;
   padding-bottom: 0.5rem;
 }
 
@@ -62,8 +73,8 @@ ul li {
 
 /* Footer */
 footer {
-  background: #2c3e50;
-  color: white;
+  background: #11111d;
+  color: #d3c8f5;
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
