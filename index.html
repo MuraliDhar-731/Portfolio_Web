@@ -2,23 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Muralidhar Kolimali - Portfolio</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muralidhar Kolimali | Portfolio</title>
+  <link rel="stylesheet" href="style_ocean.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="ocean-background">
-    <header>
-      <div class="header-left">
-        <img src="images/profile.png" alt="Muralidhar Kolimali" class="profile-pic"/>
-      </div>
-      <div class="header-right">
+  <header class="header">
+    <div class="header-content">
+      <img src="your-photo.jpg" alt="Muralidhar Kolimali" class="profile-img" />
+      <div>
         <h1>Muralidhar Kolimali</h1>
-        <h2>Data Science Graduate | AI Enthusiast</h2>
+        <p>Data Science Graduate | AI Enthusiast</p>
       </div>
-    </header>
+    </div>
+    <nav class="navbar">
+      <a href="#about">About</a>
+      <a href="#workshops">Workshops</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <section id="about" class="card scroll-tile">
+  <main>
+    <section id="about" class="card">
       <h2>About Me</h2>
       <p>
         I am a Data Science graduate student at the University of New Haven with a 3.5 GPA. 
@@ -27,12 +34,12 @@
       </p>
     </section>
 
-    <section id="workshops" class="card scroll-tile">
+    <section id="workshops" class="card">
       <h2>Workshops & Trainings</h2>
       <div class="sub-card">
         <h3>Learning LLMs and Building Chatbots</h3>
-        <p><em>Conducted by: NVIDIA</em></p>
-        <p><em>Completed: 2025</em></p>
+        <p><em>Conducted by: NVIDIA</em><br>
+           <em>Completed: 2025</em></p>
         <ul>
           <li>Hands-on training with Large Language Models (LLMs)</li>
           <li>Fine-tuned and customized models for chatbot applications</li>
@@ -42,33 +49,27 @@
       </div>
     </section>
 
-    <section id="projects" class="card scroll-tile">
+    <section id="projects" class="card">
       <h2>Projects</h2>
-
-      <div class="project">
+      <div class="sub-card">
         <h3>Vehicle Detection using YOLOv3</h3>
-        <p>
-          Developed a vehicle detection system using YOLOv3 as a final year undergraduate project.
-          It detects types of vehicles from video footage or image frames and compiles statistics based on time and type.
+        <p>Developed a vehicle detection system using YOLOv3 as a final year undergraduate project. 
+           It detects types of vehicles from video footage or image frames and compiles statistics based on time and type.
         </p>
       </div>
 
-      <div class="project">
+      <div class="sub-card">
         <h3>MindMaze – Intelligent Puzzle Game</h3>
-        <p>
-          A daily Akinator-style puzzle game using adaptive difficulty models with ML.
-          <br>
-          🔗 <a href="https://github.com/MuraliDhar-731/MindMaze" target="_blank">GitHub</a>
-        </p>
+        <p>A daily Akinator-style puzzle game using adaptive difficulty models with ML.</p>
       </div>
     </section>
 
-    <section id="contact" class="card scroll-tile">
+    <section id="contact" class="card">
       <h2>Contact</h2>
       <p>Email: <a href="mailto:Muralidhar731k@gmail.com">Muralidhar731k@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/MuralidharKolimali">/in/MuralidharKolimali</a></p>
-      <p>GitHub: <a href="https://github.com/MuraliDhar-731">@MuraliDhar-731</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/MuralidharKolimali" target="_blank">/in/MuralidharKolimali</a></p>
+      <p>GitHub: <a href="https://github.com/MuraliDhar-731" target="_blank">@MuraliDhar-731</a></p>
     </section>
-  </div>
+  </main>
 </body>
 </html>
