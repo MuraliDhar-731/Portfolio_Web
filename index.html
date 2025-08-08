@@ -3,128 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Muralidhar Kolimali | Portfolio</title>
-  <link rel="stylesheet" href="style_ocean.css" />
+  <title>Muralidhar Kolimali Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- Header Section -->
-  <header>
+  <header class="header">
     <div class="header-container">
-      <div class="profile-img">
-        <img src="assets/your-photo.jpg" alt="Muralidhar Kolimali" />
-      </div>
-      <div class="intro-text">
+      <img src="images/profile.png" alt="Muralidhar Kolimali" class="profile-img"/>
+      <div class="intro">
         <h1>Muralidhar Kolimali</h1>
-        <p class="subtitle">Data Science Graduate | AI Enthusiast</p>
-        <p class="about-me-text">
-          I am a Data Science graduate student at the University of New Haven with a 3.5 GPA.
-          My experience includes end-to-end model development, ML-based games, and backend integration.
-          I am passionate about building impactful AI solutions and data visualizations.
-        </p>
-        <nav>
-          <a href="#experience">Experience</a>
-          <a href="#skills">Skills</a>
-          <a href="#workshops">Workshops</a>
-          <a href="#projects">Projects</a>
-          <a href="#resume">Resume</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <h2>Data Science Graduate | AI Enthusiast</h2>
+        <p>I am a Data Science graduate student at the University of New Haven with a 3.5 GPA. My experience includes end-to-end model development, ML-based games, and backend integration. I am passionate about building impactful AI solutions and data visualizations.</p>
       </div>
     </div>
+    <nav class="navbar">
+      <a href="#workshops">Workshops</a>
+      <a href="#projects">Projects</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <main>
-    <!-- Professional Experience -->
-    <section id="experience">
-      <h2>Professional Experience</h2>
-      <div class="experience-item">
-        <h3>Software Engineer – Virtusa Consulting Services (Client: Citi India)</h3>
-        <p class="exp-duration">Chennai, India | June 2022 – July 2024</p>
-        <ul>
-          <li>Led the migration of retail banking data from Citi systems to Axis Bank applications.</li>
-          <li>Developed complex SQL and PL/SQL queries, leveraging analytical and aggregate functions.</li>
-          <li>Optimized performance using indexing, hints, and procedure tuning strategies.</li>
-          <li>Built master tables, performed procedural testing, and used UNIX commands for backend support.</li>
-          <li>Gained hands-on experience with Pro*C, shell scripting, and enterprise data workflows.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Skills & Certifications -->
-    <section id="skills">
-      <h2>Skills & Certifications</h2>
-      <div class="skill-badges">
-        <div class="badge">
-          <img src="assets/nvidia-llm-badge.png" alt="NVIDIA LLM Certificate">
-          <p>NVIDIA LLM Workshop & Chatbot Development</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Workshops & Trainings -->
-    <section id="workshops">
-      <h2>Workshops & Trainings</h2>
-      <div class="workshop-container">
-        <div class="workshop-card">
-          <h3>Learning LLMs and Building Chatbots</h3>
-          <p class="workshop-org">Conducted by: NVIDIA</p>
-          <p class="workshop-date">Completed: 2025</p>
-          <ul>
-            <li>Hands-on training with Large Language Models (LLMs)</li>
-            <li>Fine-tuned and customized models for chatbot applications</li>
-            <li>Explored prompt engineering and evaluation strategies</li>
-            <li>Received official NVIDIA LLM Workshop certification</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section MOVED HERE -->
-    <section id="projects">
-      <h2>Projects</h2>
+  <section id="workshops" class="section-tile">
+    <h2>Workshops & Trainings</h2>
+    <div>
+      <h3>Learning LLMs and Building Chatbots</h3>
+      <em>Conducted by: NVIDIA</em><br/>
+      <em>Completed: 2025</em>
       <ul>
-        <li>
-          <strong>MindMaze – Intelligent Puzzle Game</strong><br>
-          A daily Akinator-style puzzle game using adaptive difficulty models with ML.<br>
-          🔗 <a href="#">GitHub</a>
-        </li>
-        <li>
-          <strong>Rock-Paper-Scissors – Real-Time Computer Vision</strong><br>
-          Built using OpenCV and MediaPipe with real-time gesture recognition.<br>
-          🔗 <a href="#">GitHub</a>
-        </li>
-        <li>
-          <strong>Vehicle Detection with YOLOv3</strong><br>
-          A final-year project that detects and classifies different types of vehicles passing through a specified area
-          within a time window, using either video or image inputs.<br>
-          Key Features:
-          <ul>
-            <li>Processes both images and video footage for traffic analysis.</li>
-            <li>Splits video into frames for YOLOv3 object detection.</li>
-            <li>Identifies and counts vehicle types like cars, bikes, and buses.</li>
-            <li>Provides insights on vehicle flow for traffic management.</li>
-          </ul>
-          🔗 <a href="#">GitHub / Demo</a>
-        </li>
+        <li>Hands-on training with Large Language Models (LLMs)</li>
+        <li>Fine-tuned and customized models for chatbot applications</li>
+        <li>Explored prompt engineering and evaluation strategies</li>
+        <li>Received official NVIDIA LLM Workshop certification</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <!-- Resume Section -->
-    <section id="resume">
-      <h2>Resume</h2>
-      📄 <a href="assets/resume.pdf" download>Download My Resume</a>
-    </section>
+  <section id="projects" class="section-tile">
+    <h2>Projects</h2>
+    <div>
+      <h3>Vehicle Detection using YOLOv3</h3>
+      <p>Developed a vehicle detection system using YOLOv3 as a final year undergraduate project. It detects types of vehicles from video footage or image frames and compiles statistics based on time and type.</p>
+    </div>
+    <div>
+      <h3>MindMaze – Intelligent Puzzle Game</h3>
+      <p>A daily Akinator-style puzzle game using adaptive difficulty models with ML.</p>
+      <a href="https://github.com/MuraliDhar-731/MindMaze" target="_blank">🔗 GitHub</a>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:Muralidhar731k@gmail.com">Muralidhar731k@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/MuralidharKolimali">/in/MuralidharKolimali</a></p>
-      <p>GitHub: <a href="https://github.com/MuraliDhar-731">@MuraliDhar-731</a></p>
-    </section>
-  </main>
+  <section id="resume" class="section-tile">
+    <h2>Resume</h2>
+    <a href="assets/Muralidhar_Kolimali_Resume.pdf" target="_blank">📄 Download My Resume</a>
+  </section>
 
-  <script src="script.js"></script>
+  <section id="contact" class="section-tile">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:Muralidhar731k@gmail.com">Muralidhar731k@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/MuralidharKolimali" target="_blank">/in/MuralidharKolimali</a></p>
+    <p>GitHub: <a href="https://github.com/MuraliDhar-731" target="_blank">@MuraliDhar-731</a></p>
+  </section>
 </body>
 </html>
