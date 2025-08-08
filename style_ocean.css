@@ -1,86 +1,266 @@
 body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    background: url('assets/ocean-background.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
+  font-family: 'Bookman Old Style', serif;
+  background: url('assets/ocean-background.png') repeat-x center center;
+  background-size: cover;
+  animation: waterDrift 60s linear infinite;
+  color: #f3fdfc;
+  margin: 0;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  padding-bottom: 120px;
 }
 
+/* Header layout */
 header {
-    background: rgba(0, 255, 200, 0.8);
-    text-align: center;
-    padding: 2rem 1rem;
-    color: #000;
+  background: linear-gradient(180deg, #2dd6a7 0%, #006a71 100%);
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.header-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
-.profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    object-fit: cover;
+.profile-img img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff30;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.name-role h1 {
-    margin: 0;
-    font-size: 2.5rem;
+.intro-text {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
 }
 
-.name-role h2 {
-    font-weight: normal;
-    margin-top: 0.5rem;
+.intro-text h1 {
+  font-size: 2.5rem;
+  margin: 0.2rem 0;
 }
 
-.bio {
-    margin-top: 1rem;
-    font-size: 1.1rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+.intro-text .subtitle {
+  font-size: 1.2rem;
+  color: #e0fdf8;
+  margin: 0.5rem 0 1rem;
 }
 
-nav {
-    margin-top: 1.5rem;
+.about-me-text {
+  font-size: 1.05rem;
+  color: #e6fff8;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
 }
 
 nav a {
-    margin: 0 15px;
-    color: #000;
-    font-weight: bold;
-    text-decoration: none;
+  margin-right: 1.2rem;
+  color: #9fffe0;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-main {
-    padding: 2rem 1rem;
+nav a:hover {
+  color: #bdf7ee;
 }
 
-.card {
-    background-color: rgba(0, 50, 70, 0.8);
-    margin: 1rem auto;
-    padding: 1.5rem;
-    border-radius: 15px;
-    max-width: 900px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+/* Sections */
+main section {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.scrollable-tile {
-    max-height: 400px;
-    overflow-y: auto;
+h2 {
+  font-size: 1.8rem;
+  color: #a7f7e4;
+  border-bottom: 1px solid #a7f7e4;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
 }
 
-.project, .workshop-item {
-    margin-bottom: 1.5rem;
+/* Projects */
+#projects ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-.badge-img {
-    margin-top: 10px;
-    max-width: 200px;
+#projects ul > li {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+#projects ul ul {
+  margin-top: 0.5rem;
+  margin-left: 1.5rem;
+  list-style: disc;
+  font-size: 0.95rem;
+  color: #defdfc;
+}
+
+/* Experience Section */
+#experience {
+  margin-top: 2rem;
+}
+
+.experience-item {
+  margin-bottom: 2rem;
+}
+
+.experience-item h3 {
+  margin-bottom: 0.3rem;
+  color: #b8fff4;
+  font-size: 1.3rem;
+}
+
+.exp-duration {
+  font-style: italic;
+  color: #a0dcd4;
+  margin-bottom: 0.5rem;
+}
+
+.experience-item ul {
+  margin-left: 1.2rem;
+  color: #defdfc;
+  line-height: 1.6;
+}
+
+/* Skills & Certifications */
+#skills {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.skill-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  max-width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.badge img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.badge p {
+  font-size: 0.9rem;
+  color: #d4fdf4;
+  line-height: 1.3;
+}
+
+/* Workshops */
+#workshops {
+  margin-top: 2rem;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.workshop-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.workshop-card {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.workshop-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+.workshop-card h3 {
+  color: #b8fff4;
+  margin-bottom: 0.3rem;
+}
+
+.workshop-org, 
+.workshop-date {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #a0dcd4;
+  margin-bottom: 0.5rem;
+}
+
+.workshop-card ul {
+  margin-left: 1.2rem;
+  color: #defdfc;
+  line-height: 1.6;
+}
+
+/* Link Styling */
+a {
+  color: #9fffe0;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #bdf7ee;
+}
+
+/* Water background animation */
+@keyframes waterDrift {
+  0% { background-position: 0% center; }
+  100% { background-position: 100% center; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .intro-text {
+    text-align: center;
+  }
+
+  .profile-img img {
+    margin-bottom: 1rem;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 0.5rem 0.7rem;
+  }
 }
