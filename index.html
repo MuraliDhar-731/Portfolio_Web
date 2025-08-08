@@ -1,75 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muralidhar Kolimali | Portfolio</title>
-  <link rel="stylesheet" href="style_ocean.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muralidhar Kolimali | Portfolio</title>
+    <link rel="stylesheet" href="style_ocean.css">
 </head>
 <body>
-  <header class="header">
-    <div class="header-content">
-      <img src="your-photo.jpg" alt="Muralidhar Kolimali" class="profile-img" />
-      <div>
-        <h1>Muralidhar Kolimali</h1>
-        <p>Data Science Graduate | AI Enthusiast</p>
-      </div>
-    </div>
-    <nav class="navbar">
-      <a href="#about">About</a>
-      <a href="#workshops">Workshops</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="about" class="card">
-      <h2>About Me</h2>
-      <p>
-        I am a Data Science graduate student at the University of New Haven with a 3.5 GPA. 
-        My experience includes end-to-end model development, ML-based games, and backend integration. 
-        I am passionate about building impactful AI solutions and data visualizations.
-      </p>
-    </section>
-
-    <section id="workshops" class="card">
-      <h2>Workshops & Trainings</h2>
-      <div class="sub-card">
-        <h3>Learning LLMs and Building Chatbots</h3>
-        <p><em>Conducted by: NVIDIA</em><br>
-           <em>Completed: 2025</em></p>
-        <ul>
-          <li>Hands-on training with Large Language Models (LLMs)</li>
-          <li>Fine-tuned and customized models for chatbot applications</li>
-          <li>Explored prompt engineering and evaluation strategies</li>
-          <li>Received official NVIDIA LLM Workshop certification</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="projects" class="card">
-      <h2>Projects</h2>
-      <div class="sub-card">
-        <h3>Vehicle Detection using YOLOv3</h3>
-        <p>Developed a vehicle detection system using YOLOv3 as a final year undergraduate project. 
-           It detects types of vehicles from video footage or image frames and compiles statistics based on time and type.
+    <header>
+        <div class="header-content">
+            <img src="assets/your-photo.jpg" alt="Muralidhar Kolimali" class="profile-pic">
+            <div class="name-role">
+                <h1>Muralidhar Kolimali</h1>
+                <h2>Data Science Graduate | AI Enthusiast</h2>
+            </div>
+        </div>
+        <p class="bio">
+            I am a Data Science graduate student at the University of New Haven with a 3.5 GPA. 
+            My experience includes end-to-end model development, ML-based games, and backend integration. 
+            I am passionate about building impactful AI solutions and data visualizations.
         </p>
-      </div>
+        <nav>
+            <a href="#workshops">Workshops</a>
+            <a href="#projects">Projects</a>
+            <a href="assets/resume.pdf" target="_blank">Resume</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-      <div class="sub-card">
-        <h3>MindMaze – Intelligent Puzzle Game</h3>
-        <p>A daily Akinator-style puzzle game using adaptive difficulty models with ML.</p>
-      </div>
-    </section>
+    <main>
+        <section id="workshops" class="card scrollable-tile">
+            <h2>Workshops & Trainings</h2>
+            <div class="workshop-item">
+                <h3>Learning LLMs and Building Chatbots</h3>
+                <em>Conducted by: NVIDIA</em><br>
+                <em>Completed: 2025</em>
+                <ul>
+                    <li>Hands-on training with Large Language Models (LLMs)</li>
+                    <li>Fine-tuned and customized models for chatbot applications</li>
+                    <li>Explored prompt engineering and evaluation strategies</li>
+                    <li>Received official NVIDIA LLM Workshop certification</li>
+                </ul>
+                <img src="assets/nvidia-llm-badge.png" alt="NVIDIA LLM Badge" class="badge-img">
+            </div>
+        </section>
 
-    <section id="contact" class="card">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:Muralidhar731k@gmail.com">Muralidhar731k@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/MuralidharKolimali" target="_blank">/in/MuralidharKolimali</a></p>
-      <p>GitHub: <a href="https://github.com/MuraliDhar-731" target="_blank">@MuraliDhar-731</a></p>
-    </section>
-  </main>
+        <section id="projects" class="card scrollable-tile">
+            <h2>Projects</h2>
+
+            <div class="project">
+                <h3>Vehicle Detection using YOLOv3</h3>
+                <p>
+                    Developed a vehicle detection system using YOLOv3 as a final year undergraduate project. 
+                    It detects types of vehicles from video footage or image frames and compiles statistics based on time and type.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>MindMaze – Intelligent Puzzle Game</h3>
+                <p>
+                    A daily Akinator-style puzzle game using adaptive difficulty models with ML.<br>
+                    🔗 <a href="https://github.com/MuraliDhar-731/MindMaze">GitHub</a>
+                </p>
+            </div>
+        </section>
+
+        <section id="contact" class="card scrollable-tile">
+            <h2>Contact</h2>
+            <p>Email: muralidhar731k@gmail.com</p>
+            <p>LinkedIn: <a href="https://linkedin.com/in/MuralidharKolimali" target="_blank">linkedin.com/in/MuralidharKolimali</a></p>
+            <p>GitHub: <a href="https://github.com/MuraliDhar-731" target="_blank">github.com/MuraliDhar-731</a></p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
