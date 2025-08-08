@@ -1,266 +1,87 @@
 body {
-  font-family: 'Bookman Old Style', serif;
-  background: url('assets/ocean-background.png') repeat-x center center;
-  background-size: cover;
-  animation: waterDrift 60s linear infinite;
-  color: #f3fdfc;
   margin: 0;
-  scroll-behavior: smooth;
-  min-height: 100vh;
-  padding-bottom: 120px;
+  font-family: 'Bookman Old Style', serif;
+  color: #e6f7ff;
+  background: url('images/ocean-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
-/* Header layout */
-header {
-  background: linear-gradient(180deg, #2dd6a7 0%, #006a71 100%);
-  padding: 2rem 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.header {
+  background: linear-gradient(to bottom, #69e6b0, #34a0a4);
+  padding: 2rem;
+  text-align: center;
 }
 
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-}
-
-.profile-img img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid #ffffff30;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.intro-text {
-  flex: 1;
-  min-width: 300px;
-  text-align: left;
-}
-
-.intro-text h1 {
-  font-size: 2.5rem;
-  margin: 0.2rem 0;
-}
-
-.intro-text .subtitle {
-  font-size: 1.2rem;
-  color: #e0fdf8;
-  margin: 0.5rem 0 1rem;
-}
-
-.about-me-text {
-  font-size: 1.05rem;
-  color: #e6fff8;
-  line-height: 1.6;
-  margin-bottom: 1.2rem;
-}
-
-nav a {
-  margin-right: 1.2rem;
-  color: #9fffe0;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-nav a:hover {
-  color: #bdf7ee;
-}
-
-/* Sections */
-main section {
-  max-width: 800px;
-  margin: 2rem auto;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 1.5rem 2rem;
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-h2 {
-  font-size: 1.8rem;
-  color: #a7f7e4;
-  border-bottom: 1px solid #a7f7e4;
-  padding-bottom: 0.4rem;
-  margin-bottom: 1rem;
-}
-
-/* Projects */
-#projects ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-#projects ul > li {
-  margin-bottom: 1.5rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-#projects ul ul {
-  margin-top: 0.5rem;
-  margin-left: 1.5rem;
-  list-style: disc;
-  font-size: 0.95rem;
-  color: #defdfc;
-}
-
-/* Experience Section */
-#experience {
-  margin-top: 2rem;
-}
-
-.experience-item {
-  margin-bottom: 2rem;
-}
-
-.experience-item h3 {
-  margin-bottom: 0.3rem;
-  color: #b8fff4;
-  font-size: 1.3rem;
-}
-
-.exp-duration {
-  font-style: italic;
-  color: #a0dcd4;
-  margin-bottom: 0.5rem;
-}
-
-.experience-item ul {
-  margin-left: 1.2rem;
-  color: #defdfc;
-  line-height: 1.6;
-}
-
-/* Skills & Certifications */
-#skills {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.skill-badges {
-  display: flex;
   justify-content: center;
+  gap: 2rem;
   flex-wrap: wrap;
-  gap: 2rem;
-  margin-top: 1.5rem;
 }
 
-.badge {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 1rem;
-  max-width: 200px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.badge:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+.intro h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
-.badge img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
+.intro h2 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
 }
 
-.badge p {
-  font-size: 0.9rem;
-  color: #d4fdf4;
-  line-height: 1.3;
+.intro p {
+  max-width: 600px;
+  margin: auto;
 }
 
-/* Workshops */
-#workshops {
-  margin-top: 2rem;
-  max-width: 850px;
-  margin-left: auto;
-  margin-right: auto;
+.navbar {
+  margin-top: 1rem;
 }
 
-.workshop-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.workshop-card {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 1.5rem 2rem;
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.workshop-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-}
-
-.workshop-card h3 {
-  color: #b8fff4;
-  margin-bottom: 0.3rem;
-}
-
-.workshop-org, 
-.workshop-date {
-  font-style: italic;
-  font-size: 0.9rem;
-  color: #a0dcd4;
-  margin-bottom: 0.5rem;
-}
-
-.workshop-card ul {
-  margin-left: 1.2rem;
-  color: #defdfc;
-  line-height: 1.6;
-}
-
-/* Link Styling */
-a {
-  color: #9fffe0;
+.navbar a {
+  margin: 0 1rem;
   text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
+  font-weight: bold;
+  color: #004d4d;
+}
+
+.section-tile {
+  background: rgba(0, 30, 40, 0.8);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  max-height: 450px;
+  scrollbar-width: thin;
+  scrollbar-color: #66ffff #003333;
+}
+
+.section-tile::-webkit-scrollbar {
+  width: 8px;
+}
+.section-tile::-webkit-scrollbar-track {
+  background: #003333;
+}
+.section-tile::-webkit-scrollbar-thumb {
+  background-color: #66ffff;
+  border-radius: 10px;
+}
+
+a {
+  color: #99ffcc;
 }
 
 a:hover {
-  color: #bdf7ee;
-}
-
-/* Water background animation */
-@keyframes waterDrift {
-  0% { background-position: 0% center; }
-  100% { background-position: 100% center; }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .intro-text {
-    text-align: center;
-  }
-
-  .profile-img img {
-    margin-bottom: 1rem;
-  }
-
-  nav a {
-    display: inline-block;
-    margin: 0.5rem 0.7rem;
-  }
+  color: #66ffcc;
 }
