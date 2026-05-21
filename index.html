@@ -1,76 +1,1233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Muralidhar Kolimali | Portfolio</title>
-  <link rel="stylesheet" href="style_ocean.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muralidhar Kolimali | Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --acc:#e2c97e;
+  --acc-dim:rgba(226,201,126,0.12);
+  --acc-border:rgba(226,201,126,0.28);
+  --t1:#f0f4ff;
+  --t2:#c8d0e0;
+  --t3:#8a96b0;
+  --card-bg:rgba(10,18,32,0.82);
+  --card-border:rgba(255,255,255,0.1);
+  --card-border-acc:rgba(226,201,126,0.35);
+  --surf-hover:rgba(255,255,255,0.05);
+}
+
+body{background:#0a0f1a;overflow-x:hidden;font-family:'Segoe UI',system-ui,sans-serif;color:var(--t1)}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem}
+.nav-logo{font-size:1rem;font-weight:700;letter-spacing:0.15em;color:var(--t1);text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.scroll-progress-bar{width:2px;height:40px;background:rgba(255,255,255,0.12);border-radius:2px;position:relative;overflow:hidden}
+.scroll-fill{position:absolute;bottom:0;left:0;right:0;background:var(--acc);transition:height 0.1s;border-radius:2px}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,0.8);border-radius:2px}
+
+/* SECTIONS */
+#scroll-container{position:relative;z-index:10;pointer-events:none}
+.section{height:100vh;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.section-content{pointer-events:all;max-width:600px;text-align:center;padding:2rem}
+
+/* HEADINGS */
+h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.03em;color:var(--t1);margin-bottom:1.75rem}
+
+/* HERO / ABOUT */
+#hero .section-content{text-align:left}
+#hero h1{font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:0.95;letter-spacing:-0.04em;color:var(--t1)}
+#hero h1 .accent{color:var(--acc)}
+#hero .sub{font-size:0.78rem;color:var(--t3);margin-top:1rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600}
+#hero .cta-row{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.btn{padding:0.7rem 1.8rem;border-radius:8px;font-size:0.82rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all 0.22s;border:none}
+.btn-solid{background:var(--acc);color:#0a0f1a}
+.btn-solid:hover{background:#f0d88a;transform:translateY(-2px)}
+.btn-ghost{background:rgba(10,18,32,0.6);color:var(--t1);border:1px solid rgba(255,255,255,0.25)}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);transform:translateY(-2px)}
+
+/* KPI CARDS */
+.kpi-row{display:flex;gap:0.65rem;margin:1.2rem 0 1rem;flex-wrap:wrap}
+.kpi-card{background:var(--card-bg);border:1px solid var(--card-border-acc);border-radius:10px;padding:0.8rem 1.1rem;min-width:82px;backdrop-filter:blur(20px);transition:transform 0.2s,border-color 0.2s}
+.kpi-card:hover{transform:translateY(-2px);border-color:rgba(226,201,126,0.6)}
+.kpi-val{font-family:Georgia,serif;font-size:1.55rem;font-weight:900;color:var(--acc);line-height:1}
+.kpi-unit{font-size:0.9rem;font-weight:600}
+.kpi-lbl{font-size:0.6rem;color:var(--t2);text-transform:uppercase;letter-spacing:0.09em;margin-top:0.25rem;font-weight:600}
+
+/* CURRENT ROLE BADGE */
+.current-role{display:inline-flex;align-items:center;gap:0.45rem;background:rgba(10,18,32,0.75);border:1px solid rgba(226,201,126,0.3);border-radius:6px;padding:0.4rem 0.9rem;font-size:0.73rem;color:var(--t1);margin-bottom:1.25rem;backdrop-filter:blur(16px)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--acc);flex-shrink:0;animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.65)}}
+
+/* EXPERIENCE CARDS */
+.exp-list{display:flex;flex-direction:column;gap:1rem;pointer-events:all}
+.exp-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:1.4rem;backdrop-filter:blur(20px);transition:transform 0.25s,border-color 0.25s}
+.exp-card:hover{transform:translateY(-3px);border-color:var(--card-border-acc)}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.8rem;flex-wrap:wrap}
+.exp-role{font-size:0.97rem;font-weight:700;color:var(--t1);line-height:1.3}
+.exp-company{font-size:0.75rem;color:var(--t3);margin-top:0.2rem}
+.exp-date{font-size:0.7rem;font-weight:700;letter-spacing:0.05em;color:var(--acc);white-space:nowrap}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.32rem;margin-bottom:0.85rem}
+.exp-bullets li{font-size:0.79rem;color:var(--t2);padding-left:1rem;position:relative;line-height:1.55}
+.exp-bullets li::before{content:'–';position:absolute;left:0;color:var(--t3)}
+
+/* EXP CLICKABLE */
+.exp-clickable{cursor:pointer}
+.exp-clickable:hover{border-color:var(--card-border-acc)!important}
+.exp-click-hint{font-size:0.6rem;color:var(--acc);letter-spacing:0.06em;text-transform:uppercase;font-weight:600}
+
+/* EXP KPI CHIPS */
+.exp-kpi-row{display:flex;gap:0.5rem;margin:0.7rem 0 0.85rem;flex-wrap:wrap}
+.exp-kpi{background:rgba(226,201,126,0.08);border:1px solid rgba(226,201,126,0.25);padding:0.45rem 0.75rem;text-align:center;min-width:60px;border-radius:6px}
+.exp-kpi-val{font-size:0.76rem;font-weight:700;color:var(--acc);line-height:1.2}
+.exp-kpi-lbl{font-size:0.57rem;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;margin-top:0.12rem;font-weight:600}
+
+/* TECH TAGS — used on exp cards, proj cards, modal */
+.proj-tag{font-size:0.65rem;padding:0.25rem 0.6rem;background:rgba(255,255,255,0.08);color:var(--t1);border-radius:4px;border:1px solid rgba(255,255,255,0.15);font-weight:500}
+
+/* PROJECT CARDS */
+.projects-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;pointer-events:all}
+.proj-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:1.4rem;text-align:left;backdrop-filter:blur(20px);transition:transform 0.25s,border-color 0.25s}
+.proj-card:hover{transform:translateY(-4px);border-color:var(--card-border-acc)}
+.proj-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc);margin-bottom:0.45rem}
+.proj-name{font-size:1rem;font-weight:700;color:var(--t1);margin-bottom:0.4rem;line-height:1.3}
+.proj-desc{font-size:0.8rem;color:var(--t2);line-height:1.65;margin-bottom:0.9rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.3rem}
+.proj-link{display:inline-flex;align-items:center;gap:0.3rem;color:var(--acc);font-size:0.75rem;font-weight:600;text-decoration:none;margin-top:0.5rem;transition:opacity 0.2s}
+.proj-link:hover{opacity:0.75}
+
+/* SKILLS / ABOUT */
+#about .section-content{text-align:left;max-width:700px}
+.skills-row{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1rem}
+.skill-pill{padding:0.32rem 0.85rem;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(10,18,32,0.75);border:1px solid rgba(255,255,255,0.15);color:var(--t1);backdrop-filter:blur(12px)}
+.sp-blue{color:#7ab8e8}
+.sp-pink{color:#e2c97e}
+.sp-green{color:#7ec4a0}
+.sp-amber{color:#9db0d0}
+.stat-row{display:flex;gap:2rem;margin-top:1.5rem;flex-wrap:wrap}
+.stat-item .num{font-family:Georgia,serif;font-size:2.4rem;font-weight:900;color:var(--acc);line-height:1}
+.stat-item .lbl{font-size:0.65rem;color:var(--t2);text-transform:uppercase;letter-spacing:0.09em;margin-top:0.2rem;font-weight:600}
+
+/* CERTIFICATIONS */
+#workshops .section-content{text-align:center;max-width:700px}
+.cert-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:1.75rem;text-align:left;backdrop-filter:blur(20px)}
+.cert-org{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc);margin-bottom:0.35rem}
+.cert-title{font-size:1.1rem;font-weight:700;color:var(--t1);margin-bottom:0.25rem}
+.cert-year{font-size:0.75rem;color:var(--t3);margin-bottom:0.9rem}
+.cert-items{list-style:none;display:flex;flex-direction:column;gap:0.45rem;margin-bottom:0.9rem}
+.cert-items li{font-size:0.82rem;color:var(--t2);padding-left:1.1rem;position:relative;line-height:1.6}
+.cert-items li::before{content:'→';position:absolute;left:0;color:var(--acc);font-size:0.7rem}
+.cert-badge{display:inline-flex;align-items:center;gap:0.4rem;background:var(--acc-dim);border:1px solid var(--acc-border);color:var(--acc);font-size:0.72rem;font-weight:600;padding:0.3rem 0.85rem;border-radius:6px;letter-spacing:0.04em}
+
+/* CONTACT */
+#contact .section-content{text-align:center;max-width:600px}
+#contact .tagline{font-size:0.95rem;color:var(--t2);margin-bottom:2rem}
+.contact-links{display:flex;gap:0.85rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.contact-btn{padding:0.7rem 1.6rem;border-radius:8px;font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;background:rgba(10,18,32,0.75);color:var(--t1);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(16px);transition:all 0.22s}
+.contact-btn:hover{border-color:var(--card-border-acc);color:var(--acc);transform:translateY(-2px)}
+.thankyou{font-size:0.75rem;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-top:2rem}
+
+/* SCROLL HINT */
+.scroll-hint{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.4rem;z-index:100;opacity:1;transition:opacity 0.5s;pointer-events:none}
+.scroll-hint span{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--t3)}
+.scroll-dot{width:4px;height:4px;border-radius:50%;background:var(--t3);animation:bounce 1.6s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0);opacity:0.4}50%{transform:translateY(5px);opacity:0.9}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.modal-overlay.active{opacity:1;pointer-events:all}
+.modal-water-bg{position:absolute;inset:0;background:rgba(4,8,18,0.92);backdrop-filter:blur(22px)}
+.modal-ripple{position:absolute;border-radius:50%;border:1px solid rgba(226,201,126,0.12);animation:rippleOut 3s ease-out infinite;pointer-events:none}
+.modal-ripple:nth-child(1){width:200px;height:200px;top:50%;left:50%;margin:-100px 0 0 -100px;animation-delay:0s}
+.modal-ripple:nth-child(2){width:360px;height:360px;top:50%;left:50%;margin:-180px 0 0 -180px;animation-delay:0.9s}
+.modal-ripple:nth-child(3){width:540px;height:540px;top:50%;left:50%;margin:-270px 0 0 -270px;animation-delay:1.8s}
+@keyframes rippleOut{0%{opacity:0.5;transform:scale(0.3)}100%{opacity:0;transform:scale(1)}}
+.modal-box{position:relative;z-index:10;background:#0c1526;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:2rem 2.25rem;max-width:600px;width:90%;max-height:88vh;overflow-y:auto;transform:translateY(24px) scale(0.98);transition:transform 0.32s cubic-bezier(0.34,1.4,0.64,1)}
+.modal-overlay.active .modal-box{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:1rem;right:1.25rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--t2);font-size:0.9rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;line-height:1}
+.modal-close:hover{background:rgba(255,255,255,0.12);color:var(--t1)}
+.modal-org{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc);margin-bottom:0.3rem}
+.modal-title{font-size:1.25rem;font-weight:800;color:var(--t1);letter-spacing:-0.02em;margin-bottom:0.2rem;line-height:1.25}
+.modal-sub{font-size:0.77rem;color:var(--t3);margin-bottom:1.4rem}
+.modal-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:0.65rem;margin-bottom:1.4rem}
+.modal-kpi{background:rgba(226,201,126,0.07);border:1px solid rgba(226,201,126,0.22);padding:0.7rem;text-align:center;border-radius:8px}
+.modal-kpi-val{font-family:Georgia,serif;font-size:1.25rem;font-weight:900;color:var(--acc);line-height:1}
+.modal-kpi-lbl{font-size:0.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.22rem;font-weight:600}
+.modal-section-title{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc);margin:1.1rem 0 0.55rem}
+.modal-bullets{list-style:none;display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.5rem}
+.modal-bullets li{font-size:0.82rem;color:var(--t2);padding-left:1.1rem;position:relative;line-height:1.65}
+.modal-bullets li::before{content:'→';position:absolute;left:0;color:var(--acc);font-size:0.62rem;top:0.25rem}
+.modal-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.9rem}
+
+/* ZONE LABEL */
+.zone-label{position:fixed;bottom:2.5rem;left:2.5rem;z-index:100;font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);transition:opacity 0.5s}
+
+@media(max-width:600px){
+  nav{padding:1.25rem 1.5rem}
+  #hero h1{font-size:2.6rem}
+  .section-content{padding:1.25rem}
+  .projects-row{grid-template-columns:1fr}
+  .stat-row{gap:1.25rem}
+  .modal-box{padding:1.5rem 1.25rem}
+  .kpi-row{gap:0.5rem}
+  .kpi-val{font-size:1.3rem}
+}
+</style>
 </head>
 <body>
-  <!-- Hero Section -->
-  <div class="hero-intro">
-    <img class="profile-image" src="assets/your-photo.jpg" alt="Muralidhar Kolimali" />
-    <div class="intro-text">
-      <h1>Muralidhar Kolimali</h1>
-      <h2>Data Science Graduate | AI Enthusiast</h2>
-      <p>
-        I am a Data Science graduate student at the University of New Haven with a 3.5 GPA.
-        My experience includes end-to-end model development, ML-based games, and backend integration.
-        I am passionate about building impactful AI solutions and data visualizations.
-      </p>
-      <a href="assets/resume.pdf" class="resume-button" download>Download Resume</a>
+
+<canvas id="world"></canvas>
+
+<nav>
+  <div class="nav-logo">MD.</div>
+  <div class="nav-right">
+    <div class="scroll-progress-bar"><div class="scroll-fill" id="scrollFill" style="height:0%"></div></div>
+    <div class="hamburger" id="menuBtn">
+      <span></span><span></span><span></span>
     </div>
   </div>
+</nav>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <a href="#workshops">Workshops</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<div id="scroll-container">
 
-  <!-- Workshops -->
-  <section id="workshops" class="card-section">
-    <h2>Workshops & Trainings</h2>
-    <div class="card">
-      <h3>Learning LLMs and Building Chatbots</h3>
-      <p><em>Conducted by: NVIDIA</em></p>
-      <p><em>Completed: 2025</em></p>
-      <ul>
-        <li>Hands-on training with Large Language Models (LLMs)</li>
-        <li>Fine-tuned and customized models for chatbot applications</li>
-        <li>Explored prompt engineering and evaluation strategies</li>
-        <li>Received official NVIDIA LLM Workshop certification</li>
-      </ul>
-      <img src="assets/nvidia-llm-badge.png" alt="NVIDIA LLM Badge" class="badge" />
+  <!-- ABOUT -->
+  <section class="section" id="hero" style="justify-content:flex-start;padding-left:clamp(1.5rem,8vw,7rem)">
+    <div class="section-content" style="max-width:680px">
+      <div class="sub">About Me · M.S. Data Science · University of New Haven</div>
+      <h1 style="font-size:clamp(2.2rem,5.5vw,4.4rem);white-space:nowrap;letter-spacing:-0.03em"><span class="accent">MURALIDHAR</span> KOLIMALI</h1>
+
+      <p style="color:rgba(255,255,255,0.72);font-size:0.92rem;max-width:520px;line-height:1.8;margin-top:1rem">
+        AI engineer &amp; data scientist with <strong style="color:#fff">~3 years of industry experience</strong> across banking systems and operational analytics. I specialise in <strong style="color:#fff">RAG pipelines</strong>, conversational AI, backend APIs, and enterprise data engineering — building things that actually ship.
+      </p>
+
+      <!-- KPI CARDS -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-val">3<span class="kpi-unit">yr</span></div>
+          <div class="kpi-lbl">Industry Exp.</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">4</div>
+          <div class="kpi-lbl">AI Projects</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">3.5</div>
+          <div class="kpi-lbl">M.S. GPA</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">3</div>
+          <div class="kpi-lbl">Companies</div>
+        </div>
+      </div>
+
+      <!-- CURRENT ROLE BADGE -->
+      <div class="current-role">
+        <span class="live-dot"></span>
+        <span>Active: EMW Data Analytics Intern &amp; Motel Website (Volunteer) · Connecticut, USA</span>
+      </div>
+
+      <div class="cta-row">
+        <a href="MURALIDHAR_KOLIMALI_vantage__1_.pdf" class="btn btn-solid" download>Download Resume</a>
+        <a href="#experience" class="btn btn-ghost">View Work ↓</a>
+      </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="card-section">
-    <h2>Projects</h2>
-    <div class="card">
-      <h3>Vehicle Detection using YOLOv3</h3>
-      <p>
-        Developed a vehicle detection system using YOLOv3 as a final year undergraduate project.
-        It detects types of vehicles from video footage or image frames and compiles statistics based on time and type.
-      </p>
-    </div>
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-content" style="max-width:860px">
+      <h2>Experience</h2>
+      <div class="exp-list">
 
-    <div class="card">
-      <h3>MindMaze – Intelligent Puzzle Game</h3>
-      <p>
-        A daily Akinator-style puzzle game using adaptive difficulty models with ML.
-        <br /><a href="https://github.com/MuraliDhar-731/MindMaze" target="_blank">🔗 GitHub</a>
-      </p>
+        <div class="exp-card exp-clickable" data-modal="motel">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Full-Stack Developer &amp; Data Analyst <span style="font-size:0.65rem;background:rgba(226,201,126,0.1);border:1px solid rgba(226,201,126,0.28);color:#e2c97e;border-radius:4px;padding:0.12rem 0.5rem;margin-left:0.5rem;font-weight:600;letter-spacing:0.05em">Volunteer</span></div>
+              <div class="exp-company">Local Motel Website · Connecticut, USA</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
+              <div class="exp-date">2025 – Present</div>
+              <div class="exp-click-hint">Tap to explore ↗</div>
+            </div>
+          </div>
+          <div class="exp-kpi-row">
+            <div class="exp-kpi"><div class="exp-kpi-val">Design</div><div class="exp-kpi-lbl">UI/UX</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">Payments</div><div class="exp-kpi-lbl">Integration</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">Analytics</div><div class="exp-kpi-lbl">Dashboard</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">Active</div><div class="exp-kpi-lbl">Status</div></div>
+          </div>
+          <div class="exp-tags">
+            <span class="proj-tag">Web Design</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">Payment APIs</span><span class="proj-tag">Reservations</span><span class="proj-tag">Data Analytics</span>
+          </div>
+        </div>
+
+        <div class="exp-card exp-clickable" data-modal="emw">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Data Analytics &amp; Data Engineering Intern</div>
+              <div class="exp-company">Eastern Metal Works (EMW) · Connecticut, USA</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
+              <div class="exp-date">2025 – Present</div>
+              <div class="exp-click-hint">Tap to explore ↗</div>
+            </div>
+          </div>
+          <div class="exp-kpi-row">
+            <div class="exp-kpi"><div class="exp-kpi-val">Power BI</div><div class="exp-kpi-lbl">Dashboards</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">ETL</div><div class="exp-kpi-lbl">Pipelines</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">SQL</div><div class="exp-kpi-lbl">Analytics</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">Current</div><div class="exp-kpi-lbl">Status</div></div>
+          </div>
+          <div class="exp-tags">
+            <span class="proj-tag">Power BI</span><span class="proj-tag">ETL</span><span class="proj-tag">Python</span><span class="proj-tag">SQL</span><span class="proj-tag">Data Pipelines</span>
+          </div>
+        </div>
+
+        <div class="exp-card exp-clickable" data-modal="virtusa">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Software Engineer</div>
+              <div class="exp-company">Virtusa Consulting Services · Client: Citi India · Chennai</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
+              <div class="exp-date">Jun 2022 – Jul 2024</div>
+              <div class="exp-click-hint">Tap to explore ↗</div>
+            </div>
+          </div>
+          <div class="exp-kpi-row">
+            <div class="exp-kpi"><div class="exp-kpi-val">~3yr</div><div class="exp-kpi-lbl">Duration</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">Citi</div><div class="exp-kpi-lbl">Client</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">PL/SQL</div><div class="exp-kpi-lbl">Core Stack</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">UNIX</div><div class="exp-kpi-lbl">Platform</div></div>
+          </div>
+          <div class="exp-tags">
+            <span class="proj-tag">PL/SQL</span><span class="proj-tag">Pro*C</span><span class="proj-tag">Shell</span><span class="proj-tag">UNIX</span><span class="proj-tag">PostgreSQL</span>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer id="contact">
-    <p>© 2025 Muralidhar Kolimali | muralidhar731k@gmail.com</p>
-  </footer>
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-content" style="max-width:960px">
+      <h2>Projects</h2>
+      <div class="projects-row">
 
-  <script src="script.js"></script>
+        <div class="proj-card exp-clickable" data-modal="proj-voice" style="cursor:pointer">
+          <div class="proj-label">AI / RAG / Voice</div>
+          <div class="proj-name">AI Voice Assistant</div>
+          <div class="proj-desc">GPT-4o-mini + RAG voice assistant for government services. Real-time conversations with intelligent document retrieval.</div>
+          <div class="exp-kpi-row">
+            <div class="exp-kpi"><div class="exp-kpi-val">RAG</div><div class="exp-kpi-lbl">Core Tech</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">GPT-4o</div><div class="exp-kpi-lbl">Model</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">FAISS</div><div class="exp-kpi-lbl">Vector DB</div></div>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">FastAPI</span><span class="proj-tag">Twilio</span><span class="proj-tag">Docker</span><span class="proj-tag">PostgreSQL</span>
+          </div>
+          <div class="exp-click-hint" style="margin-top:0.6rem">Tap to explore ↗</div>
+        </div>
+
+        <div class="proj-card exp-clickable" data-modal="proj-med" style="cursor:pointer">
+          <div class="proj-label">Biomedical AI</div>
+          <div class="proj-name">MedInSight-RAG</div>
+          <div class="proj-desc">Biomedical Q&amp;A system with BioBERT + FAISS. Multi-LLM evaluation for hallucination reduction and factual accuracy.</div>
+          <div class="exp-kpi-row">
+            <div class="exp-kpi"><div class="exp-kpi-val">BioBERT</div><div class="exp-kpi-lbl">Embeddings</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">3</div><div class="exp-kpi-lbl">LLMs Tested</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">FAISS</div><div class="exp-kpi-lbl">Vector DB</div></div>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">LangChain</span><span class="proj-tag">Flan-T5</span><span class="proj-tag">BioGPT</span><span class="proj-tag">Python</span>
+          </div>
+          <div class="exp-click-hint" style="margin-top:0.6rem">Tap to explore ↗</div>
+        </div>
+
+        <div class="proj-card exp-clickable" data-modal="proj-yolo" style="cursor:pointer">
+          <div class="proj-label">Computer Vision</div>
+          <div class="proj-name">Vehicle Detection — YOLOv3</div>
+          <div class="proj-desc">Real-time CV pipeline for vehicle detection and classification. Optimised for traffic monitoring from live video.</div>
+          <div class="exp-kpi-row">
+            <div class="exp-kpi"><div class="exp-kpi-val">YOLOv3</div><div class="exp-kpi-lbl">Model</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">Real-time</div><div class="exp-kpi-lbl">Inference</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">CV</div><div class="exp-kpi-lbl">Domain</div></div>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">OpenCV</span><span class="proj-tag">Python</span><span class="proj-tag">Object Detection</span>
+          </div>
+          <div class="exp-click-hint" style="margin-top:0.6rem">Tap to explore ↗</div>
+        </div>
+
+        <div class="proj-card exp-clickable" data-modal="proj-uber" style="cursor:pointer">
+          <div class="proj-label">Data Analytics · Group Project</div>
+          <div class="proj-name">Uber Operations Dashboard</div>
+          <div class="proj-desc">Interactive Power BI dashboard analysing Uber trips, fares, driver performance, and demand patterns by location and time.</div>
+          <div class="exp-kpi-row">
+            <div class="exp-kpi"><div class="exp-kpi-val">Power BI</div><div class="exp-kpi-lbl">Platform</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">Maps</div><div class="exp-kpi-lbl">Geo Viz</div></div>
+            <div class="exp-kpi"><div class="exp-kpi-val">DAX</div><div class="exp-kpi-lbl">Analytics</div></div>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span><span class="proj-tag">SQL</span><span class="proj-tag">Power BI</span><span class="proj-tag">DAX</span>
+          </div>
+          <div class="exp-click-hint" style="margin-top:0.6rem">Tap to explore ↗</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / SKILLS -->
+  <section class="section" id="about" style="justify-content:flex-end;padding-right:clamp(1.5rem,8vw,8rem)">
+    <div class="section-content">
+      <h2>Skills &amp;<br>Education</h2>
+      <div class="stat-row">
+        <div class="stat-item"><div class="num">3.5</div><div class="lbl">M.S. GPA</div></div>
+        <div class="stat-item"><div class="num">~3yr</div><div class="lbl">Industry Exp.</div></div>
+        <div class="stat-item"><div class="num">4</div><div class="lbl">AI Projects</div></div>
+      </div>
+      <div class="skills-row">
+        <span class="skill-pill sp-blue">Python</span>
+        <span class="skill-pill sp-blue">SQL / PL/SQL</span>
+        <span class="skill-pill sp-blue">FastAPI</span>
+        <span class="skill-pill sp-blue">REST APIs</span>
+        <span class="skill-pill sp-pink">OpenAI GPT</span>
+        <span class="skill-pill sp-pink">RAG</span>
+        <span class="skill-pill sp-pink">LangChain</span>
+        <span class="skill-pill sp-pink">Prompt Eng.</span>
+        <span class="skill-pill sp-green">PostgreSQL</span>
+        <span class="skill-pill sp-green">FAISS</span>
+        <span class="skill-pill sp-green">Docker</span>
+        <span class="skill-pill sp-green">Power BI</span>
+        <span class="skill-pill sp-amber">YOLOv3</span>
+        <span class="skill-pill sp-amber">scikit-learn</span>
+        <span class="skill-pill sp-amber">Pandas</span>
+        <span class="skill-pill sp-amber">OpenCV</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.45);font-size:0.78rem;margin-top:1.2rem;line-height:1.6">M.S. Data Science — University of New Haven, CT (May 2026)<br>B.Tech ECE — Raghu Institute of Technology, India · GPA 8.32</p>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section" id="workshops">
+    <div class="section-content">
+      <h2>Certifications</h2>
+      <div class="cert-card">
+        <div class="cert-org">NVIDIA</div>
+        <div class="cert-title">LLM &amp; Chatbot Development Workshop</div>
+        <div class="cert-year">2025</div>
+        <ul class="cert-items">
+          <li>Prompt engineering, conversational AI and LLM fine-tuning</li>
+          <li>Hands-on training in AI deployment workflows</li>
+          <li>Scalable AI application development concepts</li>
+        </ul>
+        <div class="cert-badge">✓ Official NVIDIA Certification</div>
+      </div>
+      <div class="cert-card" style="margin-top:1rem">
+        <div class="cert-org">University of New Haven</div>
+        <div class="cert-title">Advanced AI Application Development Workshops</div>
+        <div class="cert-year">2024 – 2025</div>
+        <ul class="cert-items">
+          <li>Scalable AI system design and model deployment</li>
+          <li>Enterprise-scale data processing and analytics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="section-content">
+      <h2>Let's Talk</h2>
+      <div class="tagline">Open to full-time roles in AI, ML &amp; Data Engineering</div>
+      <div class="contact-links">
+        <a href="mailto:Muralidhar731k@gmail.com" class="contact-btn">Email ↗</a>
+        <a href="https://github.com/MuraliDhar-731" target="_blank" class="contact-btn">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/muralidharkolimali/" target="_blank" class="contact-btn">LinkedIn ↗</a>
+      </div>
+      <div class="thankyou">Thank you for visiting · © 2026 Muralidhar Kolimali</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PROJECT MODALS ════════════════════════════════════════ -->
+
+<!-- AI Voice Assistant Modal -->
+<div class="modal-overlay" id="modal-proj-voice">
+  <div class="modal-water-bg"></div>
+  <div class="modal-ripple"></div><div class="modal-ripple"></div><div class="modal-ripple"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-org">AI / RAG / Voice · Personal Project</div>
+    <div class="modal-title">AI Voice Assistant for Government Services</div>
+    <div class="modal-sub">End-to-end conversational AI system · Production-ready architecture</div>
+    <div class="modal-kpis">
+      <div class="modal-kpi"><div class="modal-kpi-val">RAG</div><div class="modal-kpi-lbl">Architecture</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">GPT-4o</div><div class="modal-kpi-lbl">LLM</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">FAISS</div><div class="modal-kpi-lbl">Vector DB</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Docker</div><div class="modal-kpi-lbl">Deploy</div></div>
+    </div>
+    <div class="modal-section-title">What It Does</div>
+    <ul class="modal-bullets">
+      <li>Conversational voice assistant for healthcare, transportation, caregiving and support services</li>
+      <li>FastAPI + GPT-4o-mini + Twilio backend processes real-time voice interactions end-to-end</li>
+      <li>FAISS + Sentence Transformers vector search pipeline for intelligent document retrieval</li>
+      <li>PostgreSQL backend stores user interactions, call logs, and conversation transcripts</li>
+      <li>Fully containerised with Docker and Docker Compose for scalable deployment</li>
+      <li>Scalable REST APIs handle contextual AI responses with conversation memory</li>
+    </ul>
+    <div class="modal-section-title">Tech Stack</div>
+    <div class="modal-tags">
+      <span class="proj-tag">FastAPI</span><span class="proj-tag">GPT-4o-mini</span><span class="proj-tag">RAG</span>
+      <span class="proj-tag">FAISS</span><span class="proj-tag">Sentence Transformers</span><span class="proj-tag">Twilio</span>
+      <span class="proj-tag">PostgreSQL</span><span class="proj-tag">Docker</span><span class="proj-tag">REST APIs</span>
+    </div>
+  </div>
+</div>
+
+<!-- MedInSight Modal -->
+<div class="modal-overlay" id="modal-proj-med">
+  <div class="modal-water-bg"></div>
+  <div class="modal-ripple"></div><div class="modal-ripple"></div><div class="modal-ripple"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-org">Biomedical AI · Research Project</div>
+    <div class="modal-title">MedInSight-RAG — Biomedical AI Assistant</div>
+    <div class="modal-sub">Multi-LLM RAG system for reliable biomedical question answering</div>
+    <div class="modal-kpis">
+      <div class="modal-kpi"><div class="modal-kpi-val">BioBERT</div><div class="modal-kpi-lbl">Embeddings</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">3</div><div class="modal-kpi-lbl">LLMs Evaluated</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">FAISS</div><div class="modal-kpi-lbl">Retrieval</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">RAG</div><div class="modal-kpi-lbl">Architecture</div></div>
+    </div>
+    <div class="modal-section-title">What It Does</div>
+    <ul class="modal-bullets">
+      <li>RAG system for biomedical Q&amp;A — retrieves context before generating answers to reduce hallucination</li>
+      <li>BioBERT embeddings + FAISS vector search for domain-specific biomedical document retrieval</li>
+      <li>Evaluated BioGPT, Flan-T5, and Phi-2 on semantic similarity, factual accuracy, and hallucination</li>
+      <li>Context-aware response generation built on reliable biomedical information retrieval</li>
+      <li>Focused on reducing LLM hallucination in high-stakes medical information contexts</li>
+    </ul>
+    <div class="modal-section-title">Tech Stack</div>
+    <div class="modal-tags">
+      <span class="proj-tag">BioBERT</span><span class="proj-tag">FAISS</span><span class="proj-tag">LangChain</span>
+      <span class="proj-tag">BioGPT</span><span class="proj-tag">Flan-T5</span><span class="proj-tag">Phi-2</span>
+      <span class="proj-tag">Python</span><span class="proj-tag">Sentence Transformers</span>
+    </div>
+  </div>
+</div>
+
+<!-- YOLOv3 Modal -->
+<div class="modal-overlay" id="modal-proj-yolo">
+  <div class="modal-water-bg"></div>
+  <div class="modal-ripple"></div><div class="modal-ripple"></div><div class="modal-ripple"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-org">Computer Vision · Undergraduate Final Year Project</div>
+    <div class="modal-title">Vehicle Detection using YOLOv3</div>
+    <div class="modal-sub">Real-time object detection pipeline for traffic monitoring applications</div>
+    <div class="modal-kpis">
+      <div class="modal-kpi"><div class="modal-kpi-val">YOLOv3</div><div class="modal-kpi-lbl">Model</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Real-time</div><div class="modal-kpi-lbl">Inference</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">OpenCV</div><div class="modal-kpi-lbl">Framework</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Traffic</div><div class="modal-kpi-lbl">Domain</div></div>
+    </div>
+    <div class="modal-section-title">What It Does</div>
+    <ul class="modal-bullets">
+      <li>Frame-by-frame object detection pipeline detecting and classifying vehicle types in real time</li>
+      <li>YOLOv3 backbone with OpenCV for efficient video stream processing</li>
+      <li>Optimised inference handling for continuous traffic monitoring applications</li>
+      <li>Compiles time-series statistics by vehicle type for traffic analysis reporting</li>
+      <li>Designed as final year B.Tech undergraduate capstone project</li>
+    </ul>
+    <div class="modal-section-title">Tech Stack</div>
+    <div class="modal-tags">
+      <span class="proj-tag">YOLOv3</span><span class="proj-tag">OpenCV</span><span class="proj-tag">Python</span>
+      <span class="proj-tag">Object Detection</span><span class="proj-tag">Computer Vision</span><span class="proj-tag">NumPy</span>
+    </div>
+  </div>
+</div>
+
+<!-- Uber Dashboard Modal -->
+<div class="modal-overlay" id="modal-proj-uber">
+  <div class="modal-water-bg"></div>
+  <div class="modal-ripple"></div><div class="modal-ripple"></div><div class="modal-ripple"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-org">Data Analytics · University Group Project</div>
+    <div class="modal-title">Uber Operations Dashboard</div>
+    <div class="modal-sub">End-to-end analytics dashboard built with Power BI · Python &amp; SQL data prep</div>
+    <div class="modal-kpis">
+      <div class="modal-kpi"><div class="modal-kpi-val">Power BI</div><div class="modal-kpi-lbl">Platform</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Maps</div><div class="modal-kpi-lbl">Geo Viz</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">DAX</div><div class="modal-kpi-lbl">Analytics</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Python</div><div class="modal-kpi-lbl">Data Prep</div></div>
+    </div>
+    <div class="modal-section-title">What It Does</div>
+    <ul class="modal-bullets">
+      <li>Interactive dashboard analysing Uber trip data — ride volume, fares, and driver performance metrics</li>
+      <li>Geo-spatial demand maps visualising peak pickup/drop-off locations across the city</li>
+      <li>Time-series trend lines showing demand patterns by hour, day, and season</li>
+      <li>Fare analysis breakdowns — average fares by distance, surge pricing patterns, and revenue trends</li>
+      <li>Driver performance analytics — trip completion rates, ratings, and utilisation metrics</li>
+      <li>Dynamic filters and slicers allowing drill-down by date range, location, and trip type</li>
+      <li>Python and SQL used for data cleaning, transformation, and pipeline prep before Power BI ingestion</li>
+    </ul>
+    <div class="modal-section-title">Tech Stack</div>
+    <div class="modal-tags">
+      <span class="proj-tag">Power BI</span><span class="proj-tag">DAX</span><span class="proj-tag">Python</span>
+      <span class="proj-tag">SQL</span><span class="proj-tag">Pandas</span><span class="proj-tag">Geo Maps</span>
+      <span class="proj-tag">Data Visualisation</span><span class="proj-tag">ETL</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EXPERIENCE MODALS ═══════════════════════════════════ -->
+
+<!-- EMW Modal -->
+<div class="modal-overlay" id="modal-motel">
+  <div class="modal-water-bg"></div>
+  <div class="modal-ripple"></div><div class="modal-ripple"></div><div class="modal-ripple"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-org">Volunteer · Local Motel · Connecticut, USA</div>
+    <div class="modal-title">Full-Stack Developer &amp; Data Analyst</div>
+    <div class="modal-sub">2025 – Present · End-to-end website build &amp; data infrastructure</div>
+
+    <div class="modal-kpis">
+      <div class="modal-kpi"><div class="modal-kpi-val">UI/UX</div><div class="modal-kpi-lbl">Design</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Payments</div><div class="modal-kpi-lbl">Integration</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Analytics</div><div class="modal-kpi-lbl">Dashboard</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Active</div><div class="modal-kpi-lbl">Status</div></div>
+    </div>
+
+    <div class="modal-section-title">What I'm Building</div>
+    <ul class="modal-bullets">
+      <li>Designing and building the full website — UI/UX, layout, and brand identity for the motel</li>
+      <li>Backend system for storing and managing guest data, reservations, and booking history securely</li>
+      <li>Payment service integration — handling online transactions, booking confirmations, and receipts</li>
+      <li>Data analytics dashboard tracking occupancy rates, revenue trends, and booking patterns</li>
+      <li>Reservation management system — availability calendar, room allocation, and guest check-in/out flows</li>
+      <li>User data storage with privacy-compliant data handling for guest profiles and preferences</li>
+    </ul>
+
+    <div class="modal-section-title">Tech Stack</div>
+    <div class="modal-tags">
+      <span class="proj-tag">Web Design</span><span class="proj-tag">HTML/CSS/JS</span><span class="proj-tag">Python</span>
+      <span class="proj-tag">PostgreSQL</span><span class="proj-tag">Payment APIs</span><span class="proj-tag">REST APIs</span>
+      <span class="proj-tag">Data Analytics</span><span class="proj-tag">Reservations System</span><span class="proj-tag">FastAPI</span>
+    </div>
+  </div>
+</div>
+
+<!-- EMW Modal -->
+<div class="modal-overlay" id="modal-emw">
+  <div class="modal-water-bg"></div>
+  <div class="modal-ripple"></div>
+  <div class="modal-ripple"></div>
+  <div class="modal-ripple"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-org">Eastern Metal Works · Connecticut, USA</div>
+    <div class="modal-title">Data Analytics &amp; Data Engineering Intern</div>
+    <div class="modal-sub">2025 – Present · Currently Active</div>
+
+    <div class="modal-kpis">
+      <div class="modal-kpi"><div class="modal-kpi-val">Power BI</div><div class="modal-kpi-lbl">Reporting</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">ETL</div><div class="modal-kpi-lbl">Workflows</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">SQL</div><div class="modal-kpi-lbl">Analytics</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Active</div><div class="modal-kpi-lbl">Status</div></div>
+    </div>
+
+    <div class="modal-section-title">What I Do Here</div>
+    <ul class="modal-bullets">
+      <li>Develop operational analytics dashboards and ETL workflows supporting real-time business reporting</li>
+      <li>Build and maintain Power BI reports integrating enterprise operational datasets for decision-making</li>
+      <li>Automate backend data transformation, reporting pipelines, and operational analytics processes</li>
+      <li>Collaborate on dashboard enhancements, filtering systems, and business reporting workflows</li>
+      <li>Support data preparation, validation, and integration across enterprise business systems</li>
+    </ul>
+
+    <div class="modal-section-title">Tech Stack</div>
+    <div class="modal-tags">
+      <span class="proj-tag">Power BI</span><span class="proj-tag">Python</span><span class="proj-tag">SQL</span>
+      <span class="proj-tag">ETL</span><span class="proj-tag">Data Pipelines</span><span class="proj-tag">Pandas</span>
+      <span class="proj-tag">Data Validation</span><span class="proj-tag">Reporting Automation</span>
+    </div>
+  </div>
+</div>
+
+<!-- Virtusa Modal -->
+<div class="modal-overlay" id="modal-virtusa">
+  <div class="modal-water-bg"></div>
+  <div class="modal-ripple"></div>
+  <div class="modal-ripple"></div>
+  <div class="modal-ripple"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-org">Virtusa Consulting Services · Client: Citi India · Chennai</div>
+    <div class="modal-title">Software Engineer</div>
+    <div class="modal-sub">June 2022 – July 2024 · 2 Years 1 Month</div>
+
+    <div class="modal-kpis">
+      <div class="modal-kpi"><div class="modal-kpi-val">~3yr</div><div class="modal-kpi-lbl">Duration</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Citi</div><div class="modal-kpi-lbl">Client</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">Banking</div><div class="modal-kpi-lbl">Domain</div></div>
+      <div class="modal-kpi"><div class="modal-kpi-val">UNIX</div><div class="modal-kpi-lbl">Platform</div></div>
+    </div>
+
+    <div class="modal-section-title">Key Contributions</div>
+    <ul class="modal-bullets">
+      <li>Led backend development on enterprise banking migration projects — large-scale retail banking datasets</li>
+      <li>Optimised PL/SQL queries using indexing, analytical functions, optimizer hints and SQL tuning to improve data processing efficiency significantly</li>
+      <li>Automated backend operational workflows using Pro*C and Shell scripting, reducing manual operational effort and improving process reliability</li>
+      <li>Built SQL-based data processing and reporting pipelines using GROUP functions, SET operators and analytical functions</li>
+      <li>Supported UNIX-based production systems including backend monitoring, procedural testing and root-cause analysis</li>
+      <li>Collaborated cross-functionally on backend integration, enterprise support, and large-scale data validation</li>
+    </ul>
+
+    <div class="modal-section-title">Tech Stack</div>
+    <div class="modal-tags">
+      <span class="proj-tag">PL/SQL</span><span class="proj-tag">Pro*C</span><span class="proj-tag">Shell Scripting</span>
+      <span class="proj-tag">UNIX/Linux</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">SQL Tuning</span>
+      <span class="proj-tag">ETL Concepts</span><span class="proj-tag">Data Validation</span><span class="proj-tag">Banking Systems</span>
+    </div>
+  </div>
+</div>
+
+<div class="scroll-hint" id="scrollHint">
+  <span>Dive</span>
+  <div class="scroll-dot"></div>
+</div>
+
+<div class="zone-label" id="zoneLabel">Surface</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ════════════════════════════════════════════════════════════
+// OCEAN WORLD — shark dives from surface to abyss
+// Y axis: camera descends from y=0 (surface) down to y=-160
+// Z axis: gentle forward drift only
+// Depth zones: 0=surface(light blue) → -40=shallow(teal)
+//              → -80=mid(blue) → -120=deep(dark blue)
+//              → -160=abyss(near black)
+// ════════════════════════════════════════════════════════════
+
+const canvas = document.getElementById('world');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(65, window.innerWidth/window.innerHeight, 0.1, 300);
+camera.position.set(0, 0, 12);
+camera.lookAt(0, -1, 0);
+
+// ─── STATE ──────────────────────────────────────────────────
+let scrollY = 0;
+let camY = 0, camYTarget = 0;
+let currentSection = 0;
+const sections = ['About','Experience','Projects','Skills','Certs','Contact'];
+const zoneLabel = document.getElementById('zoneLabel');
+const scrollFill = document.getElementById('scrollFill');
+const scrollHint = document.getElementById('scrollHint');
+
+// ─── DEPTH COLOR STOPS ──────────────────────────────────────
+// camera Y goes 0 → -160 as we scroll
+const depthColors=[
+  {y:0,   fog:0x1a3a52, amb:0x2a5870, pt:0x1a5070, fogNear:18, fogFar:55},  // surface — dark steel blue
+  {y:-30, fog:0x0f2e42, amb:0x1a4060, pt:0x104858, fogNear:15, fogFar:48},  // shallow
+  {y:-65, fog:0x091e30, amb:0x0f2a40, pt:0x083040, fogNear:12, fogFar:40},  // mid
+  {y:-100,fog:0x060f1e, amb:0x0a1830, pt:0x051828, fogNear:10, fogFar:32},  // deep
+  {y:-135,fog:0x030810, amb:0x060f1a, pt:0x030c18, fogNear:8,  fogFar:24},  // twilight
+  {y:-160,fog:0x010408, amb:0x020608, pt:0x010408, fogNear:6,  fogFar:18},  // abyss
+];
+
+function sampleDepth(y){
+  const stops=depthColors;
+  for(let i=0;i<stops.length-1;i++){
+    if(y>=stops[i+1].y){
+      const t=(y-stops[i].y)/(stops[i+1].y-stops[i].y);
+      const s=stops[i], e=stops[i+1];
+      function lc(a,b){
+        const ca=new THREE.Color(a), cb=new THREE.Color(b);
+        return new THREE.Color(
+          ca.r+(cb.r-ca.r)*t,
+          ca.g+(cb.g-ca.g)*t,
+          ca.b+(cb.b-ca.b)*t
+        );
+      }
+      return {
+        fog: lc(s.fog,e.fog),
+        amb: lc(s.amb,e.amb),
+        pt:  lc(s.pt, e.pt),
+        fogNear: s.fogNear+(e.fogNear-s.fogNear)*t,
+        fogFar:  s.fogFar +(e.fogFar -s.fogFar)*t,
+      };
+    }
+  }
+  return {fog:new THREE.Color(stops[stops.length-1].fog),
+          amb:new THREE.Color(stops[stops.length-1].amb),
+          pt: new THREE.Color(stops[stops.length-1].pt),
+          fogNear:6,fogFar:18};
+}
+
+// ─── FOG & CLEAR ────────────────────────────────────────────
+scene.fog = new THREE.FogExp2(0x1a3a52, 0.035);
+renderer.setClearColor(0x1a3a52);
+
+// ─── LIGHTS ─────────────────────────────────────────────────
+const ambient = new THREE.AmbientLight(0x90e0ff, 0.9);
+scene.add(ambient);
+const sun = new THREE.DirectionalLight(0xb0f0ff, 1.2); // caustic-like from above
+sun.position.set(5, 20, 8);
+scene.add(sun);
+const deepLight = new THREE.PointLight(0x0050a0, 2.5, 40);
+deepLight.position.set(0, -80, 0);
+scene.add(deepLight);
+
+// ─── HELPERS ────────────────────────────────────────────────
+function box(w,h,d,col){
+  return new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshLambertMaterial({color:col}));
+}
+function cyl(rt,rb,h,s,col){
+  return new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,s),new THREE.MeshLambertMaterial({color:col}));
+}
+function sph(r,s,col){
+  return new THREE.Mesh(new THREE.SphereGeometry(r,s,s),new THREE.MeshLambertMaterial({color:col}));
+}
+
+// ─── OCEAN FLOOR (seabed at y=-170) ─────────────────────────
+const seabed = new THREE.Mesh(
+  new THREE.PlaneGeometry(200,200,30,30),
+  new THREE.MeshLambertMaterial({color:0x0a1a2e})
+);
+seabed.rotation.x = -Math.PI/2;
+seabed.position.y = -170;
+scene.add(seabed);
+
+// ─── SURFACE LIGHT SHIMMER (caustic planes near y=0) ────────
+for(let i=0;i<6;i++){
+  const p=new THREE.Mesh(
+    new THREE.PlaneGeometry(60,60),
+    new THREE.MeshBasicMaterial({color:0xaaeeff, transparent:true, opacity:0.04+i*0.01, side:THREE.DoubleSide})
+  );
+  p.rotation.x=-Math.PI/2;
+  p.position.y=-i*0.3-1;
+  scene.add(p);
+}
+
+// ─── SHARK ──────────────────────────────────────────────────
+function makeShark(){
+  const g=new THREE.Group();
+
+  // Main body — elongated
+  const body=new THREE.Mesh(
+    new THREE.CylinderGeometry(0.25,0.08,2.8,10),
+    new THREE.MeshLambertMaterial({color:0x7a9db5})
+  );
+  body.rotation.z=Math.PI/2;
+  g.add(body);
+
+  // Belly (lighter)
+  const belly=new THREE.Mesh(
+    new THREE.CylinderGeometry(0.18,0.06,2.4,8),
+    new THREE.MeshLambertMaterial({color:0xd0e8f0})
+  );
+  belly.rotation.z=Math.PI/2;
+  belly.position.y=-0.06;
+  g.add(belly);
+
+  // Head snout
+  const snout=new THREE.Mesh(
+    new THREE.ConeGeometry(0.25,0.6,8),
+    new THREE.MeshLambertMaterial({color:0x7a9db5})
+  );
+  snout.rotation.z=-Math.PI/2;
+  snout.position.set(1.65,0,0);
+  g.add(snout);
+
+  // Dorsal fin
+  const dorsal=new THREE.Mesh(
+    new THREE.ConeGeometry(0.08,0.55,4),
+    new THREE.MeshLambertMaterial({color:0x6a8da5})
+  );
+  dorsal.position.set(0.1,0.3,0);
+  g.add(dorsal);
+
+  // Pectoral fins
+  function pec(side){
+    const f=new THREE.Mesh(
+      new THREE.ConeGeometry(0.06,0.65,4),
+      new THREE.MeshLambertMaterial({color:0x7a9db5})
+    );
+    f.rotation.z=side*0.5;
+    f.rotation.x=side*0.3;
+    f.position.set(0.2,0,side*0.28);
+    g.add(f);
+  }
+  pec(1); pec(-1);
+
+  // Tail fin
+  const tailT=new THREE.Mesh(
+    new THREE.ConeGeometry(0.06,0.6,4),
+    new THREE.MeshLambertMaterial({color:0x6a8da5})
+  );
+  tailT.position.set(-1.5,0.2,0);
+  tailT.rotation.z=0.5;
+  g.add(tailT);
+  const tailB=new THREE.Mesh(
+    new THREE.ConeGeometry(0.05,0.45,4),
+    new THREE.MeshLambertMaterial({color:0x6a8da5})
+  );
+  tailB.position.set(-1.45,-0.15,0);
+  tailB.rotation.z=-0.5;
+  g.add(tailB);
+
+  // Eye
+  const eye=sph(0.055,6,0x111111);
+  eye.position.set(1.2,0.08,0.2);
+  g.add(eye);
+
+  return g;
+}
+const shark=makeShark();
+shark.position.set(0,0,6);
+scene.add(shark);
+
+// ─── BUBBLES ────────────────────────────────────────────────
+const bubbles=[];
+for(let i=0;i<80;i++){
+  const r=0.04+Math.random()*0.12;
+  const b=new THREE.Mesh(
+    new THREE.SphereGeometry(r,5,5),
+    new THREE.MeshBasicMaterial({color:0xccf0ff,transparent:true,opacity:0.25+Math.random()*0.3})
+  );
+  b.position.set(
+    (Math.random()-0.5)*30,
+    -Math.random()*160,
+    (Math.random()-0.5)*20
+  );
+  b.userData={speed:0.02+Math.random()*0.04, drift:(Math.random()-0.5)*0.008};
+  scene.add(b);
+  bubbles.push(b);
+}
+
+// ─── PARTICLES (plankton / marine snow) ─────────────────────
+const particleCount=300;
+const pGeo=new THREE.BufferGeometry();
+const pPos=new Float32Array(particleCount*3);
+for(let i=0;i<particleCount;i++){
+  pPos[i*3]=(Math.random()-0.5)*40;
+  pPos[i*3+1]=-Math.random()*160;
+  pPos[i*3+2]=(Math.random()-0.5)*20;
+}
+pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+const particles=new THREE.Points(pGeo,
+  new THREE.PointsMaterial({color:0x88ddff,size:0.06,transparent:true,opacity:0.5})
+);
+scene.add(particles);
+
+// ─── SEAWEED (near surface, y=-5 to -25) ────────────────────
+function makeSeaweed(x,yBase,z){
+  const g=new THREE.Group();
+  const segs=5;
+  for(let i=0;i<segs;i++){
+    const seg=box(0.06,0.7,0.04,0x1aaa88);
+    seg.position.y=yBase+i*0.65;
+    seg.rotation.z=Math.sin(i*0.8)*0.25;
+    g.add(seg);
+  }
+  g.position.set(x,0,z);
+  return g;
+}
+for(let i=0;i<24;i++){
+  const x=(Math.random()-0.5)*28;
+  const z=(Math.random()-0.5)*16-4;
+  scene.add(makeSeaweed(x,-8,z));
+}
+
+// ─── CORAL (mid depth y=-40 to -80) ─────────────────────────
+function makeCoral(x,y,z,col){
+  const g=new THREE.Group();
+  for(let i=0;i<5;i++){
+    const branch=cyl(0.04,0.01,0.5+Math.random()*0.6,5,col);
+    branch.position.set((Math.random()-0.5)*0.5, 0.4+i*0.15, (Math.random()-0.5)*0.5);
+    branch.rotation.set((Math.random()-0.5)*0.6,Math.random()*Math.PI*2,(Math.random()-0.5)*0.5);
+    g.add(branch);
+    const tip=sph(0.07+Math.random()*0.04,5,col);
+    tip.position.copy(branch.position);
+    tip.position.y+=0.4;
+    g.add(tip);
+  }
+  const base=cyl(0.12,0.15,0.3,7,0x5a4a3a);
+  base.position.y=0.15;
+  g.add(base);
+  g.position.set(x,y,z);
+  return g;
+}
+const coralColors=[0xff6b9d,0xff4560,0xff8c42,0xffda44,0x44ccaa,0xee44aa];
+for(let i=0;i<30;i++){
+  const x=(Math.random()-0.5)*28;
+  const y=-40-Math.random()*45;
+  const z=(Math.random()-0.5)*16-2;
+  const col=coralColors[Math.floor(Math.random()*coralColors.length)];
+  scene.add(makeCoral(x,y,z,col));
+}
+
+// ─── JELLYFISH (y=-60 to -110) ──────────────────────────────
+const jellyfish=[];
+function makeJelly(x,y,z,col){
+  const g=new THREE.Group();
+  const bell=new THREE.Mesh(
+    new THREE.SphereGeometry(0.4,10,8,0,Math.PI*2,0,Math.PI/2),
+    new THREE.MeshLambertMaterial({color:col,transparent:true,opacity:0.55})
+  );
+  g.add(bell);
+  for(let t=0;t<6;t++){
+    const tent=cyl(0.015,0.005,0.8+Math.random()*0.6,4,col);
+    tent.position.set(
+      Math.sin(t/6*Math.PI*2)*0.2,
+      -0.5-Math.random()*0.3,
+      Math.cos(t/6*Math.PI*2)*0.2
+    );
+    g.add(tent);
+  }
+  g.position.set(x,y,z);
+  g.userData={baseY:y, phase:Math.random()*Math.PI*2, speed:0.3+Math.random()*0.3};
+  return g;
+}
+const jellyColors=[0xff88cc,0xcc88ff,0x88ccff,0x88ffee,0xffcc44];
+for(let i=0;i<16;i++){
+  const y=-60-Math.random()*55;
+  const jelly=makeJelly((Math.random()-0.5)*20, y, (Math.random()-0.5)*14, jellyColors[i%5]);
+  scene.add(jelly);
+  jellyfish.push(jelly);
+}
+
+// ─── BIOLUMINESCENT ORBS (deep, y=-110 to -160) ─────────────
+const bioOrbs=[];
+const bioColors=[0x00ffcc,0x4488ff,0xff44cc,0x44ffaa,0x8844ff];
+for(let i=0;i<20;i++){
+  const orb=sph(0.12+Math.random()*0.18,7,bioColors[i%5]);
+  orb.material.transparent=true;
+  orb.material.opacity=0.7;
+  orb.position.set(
+    (Math.random()-0.5)*22,
+    -110-Math.random()*50,
+    (Math.random()-0.5)*14
+  );
+  const light=new THREE.PointLight(bioColors[i%5],0.6,4);
+  light.position.copy(orb.position);
+  scene.add(light);
+  orb.userData={light, phase:Math.random()*Math.PI*2};
+  scene.add(orb);
+  bioOrbs.push(orb);
+}
+
+// ─── SEAFLOOR ROCKS & ABYSS STRUCTURE ───────────────────────
+for(let i=0;i<20;i++){
+  const r=box(0.6+Math.random()*1.5, 0.4+Math.random()*0.8, 0.6+Math.random()*1.2, 0x0a1520);
+  r.position.set((Math.random()-0.5)*30, -169, (Math.random()-0.5)*20);
+  r.rotation.y=Math.random()*Math.PI;
+  scene.add(r);
+}
+
+// ─── SMALL FISH SCHOOLS ─────────────────────────────────────
+const fishSchools=[];
+function makeFishSchool(cx,cy,cz,col){
+  const g=new THREE.Group();
+  for(let i=0;i<12;i++){
+    const f=new THREE.Group();
+    const fb=box(0.18,0.06,0.08,col);
+    f.add(fb);
+    const ft=new THREE.Mesh(new THREE.ConeGeometry(0.04,0.1,4),
+      new THREE.MeshLambertMaterial({color:col}));
+    ft.rotation.z=Math.PI/2;
+    ft.position.x=-0.14;
+    f.add(ft);
+    f.position.set((Math.random()-0.5)*3,(Math.random()-0.5)*1.5,(Math.random()-0.5)*2);
+    g.add(f);
+  }
+  g.position.set(cx,cy,cz);
+  g.userData={cx,cy,cz,phase:Math.random()*Math.PI*2,speed:0.4+Math.random()*0.3};
+  return g;
+}
+const fishColors=[0xffcc44,0xff8844,0x44ffcc,0xff6688,0xaaddff];
+for(let i=0;i<8;i++){
+  const fs=makeFishSchool(
+    (Math.random()-0.5)*18,
+    -15-Math.random()*100,
+    (Math.random()-0.5)*10,
+    fishColors[i%5]
+  );
+  scene.add(fs);
+  fishSchools.push(fs);
+}
+
+// ─── BACKGROUND SPHERE ──────────────────────────────────────
+const oceanSphere=new THREE.Mesh(
+  new THREE.SphereGeometry(250,16,16),
+  new THREE.MeshBasicMaterial({color:0x1a3a52,side:THREE.BackSide})
+);
+scene.add(oceanSphere);
+
+// ─── CAMERA PATH (Y descends with scroll) ───────────────────
+// sections map to Y depths
+const depthMap=[0,-25,-55,-90,-120,-155];
+// small Z offset per section for gentle forward drift
+const zDrift=[12,10,8,7,6,5];
+
+function lerp(a,b,t){return a+(b-a)*t}
+
+// ─── SCROLL ─────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  scrollY=window.scrollY;
+  const totalH=document.body.scrollHeight-window.innerHeight;
+  const prog=Math.max(0,Math.min(1,scrollY/Math.max(totalH,1)));
+  scrollFill.style.height=(prog*100)+'%';
+  scrollHint.style.opacity=scrollY>60?'0':'1';
+  const si=Math.min(Math.floor(prog*sections.length),sections.length-1);
+  if(si!==currentSection){
+    currentSection=si;
+    zoneLabel.textContent=sections[si];
+  }
+});
+
+// ─── RESIZE ─────────────────────────────────────────────────
+window.addEventListener('resize',()=>{
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+});
+
+// ─── ANIMATE ────────────────────────────────────────────────
+const clock=new THREE.Clock();
+let sharkTailPhase=0;
+
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clock.getElapsedTime();
+
+  // ── Camera depth from scroll ──
+  const totalH=document.body.scrollHeight-window.innerHeight;
+  const prog=Math.max(0,Math.min(1,scrollY/Math.max(totalH,1)));
+  const pathProg=prog*(depthMap.length-1);
+  const pi=Math.floor(pathProg);
+  const pt=pathProg-pi;
+  const p0i=Math.min(pi,depthMap.length-1);
+  const p1i=Math.min(pi+1,depthMap.length-1);
+  camYTarget=lerp(depthMap[p0i],depthMap[p1i],pt);
+  const camZTarget=lerp(zDrift[p0i],zDrift[p1i],pt);
+  camY+=(camYTarget-camY)*0.04;
+  camera.position.set(
+    Math.sin(t*0.12)*0.4,
+    camY + Math.sin(t*0.4)*0.15,
+    camZTarget
+  );
+  camera.lookAt(0, camY-1.5, 0);
+
+  // ── Depth colour ──
+  const dc=sampleDepth(camY);
+  scene.fog.color.copy(dc.fog);
+  renderer.setClearColor(dc.fog);
+  oceanSphere.material.color.copy(dc.fog);
+  ambient.color.copy(dc.amb);
+  deepLight.color.copy(dc.pt);
+  const ambTarget=Math.max(0.15, 0.9 - Math.abs(camY)/130);
+  ambient.intensity+=(ambTarget-ambient.intensity)*0.03;
+  const sunTarget=Math.max(0, 1.2 - Math.abs(camY)/50);
+  sun.intensity+=(sunTarget-sun.intensity)*0.03;
+  const fogD=dc.fogFar-dc.fogNear;
+  scene.fog.density = 0.012 + Math.abs(camY)/160*0.05;
+
+  // ── Shark swims ahead of camera ──
+  sharkTailPhase+=0.07;
+  shark.position.set(
+    Math.sin(t*0.25)*1.2,
+    camY + Math.sin(t*0.35)*0.4 - 1.5,
+    camZTarget - 5
+  );
+  // Tilt slightly down as we dive deeper
+  shark.rotation.x = -0.05 - prog*0.18;
+  // Gentle yaw side to side
+  shark.rotation.y = Math.sin(t*0.25)*0.15 + Math.PI;
+  // Tail wag via Z rotation on body
+  shark.children[0].rotation.y=Math.sin(sharkTailPhase)*0.2;
+
+  // ── Bubbles rise ──
+  bubbles.forEach(b=>{
+    b.position.y+=b.userData.speed;
+    b.position.x+=b.userData.drift;
+    if(b.position.y>2) b.position.y=-Math.random()*160;
+  });
+
+  // ── Jellyfish pulse ──
+  jellyfish.forEach(j=>{
+    j.position.y=j.userData.baseY+Math.sin(t*j.userData.speed+j.userData.phase)*0.5;
+    j.scale.y=0.85+Math.sin(t*j.userData.speed*2+j.userData.phase)*0.15;
+    j.rotation.y+=0.005;
+  });
+
+  // ── Bioluminescent orbs pulse ──
+  bioOrbs.forEach(o=>{
+    const pulse=0.5+Math.sin(t*1.5+o.userData.phase)*0.5;
+    o.material.opacity=0.4+pulse*0.5;
+    o.userData.light.intensity=0.4+pulse*1.2;
+    o.position.x+=Math.sin(t*0.2+o.userData.phase)*0.003;
+    o.userData.light.position.copy(o.position);
+  });
+
+  // ── Fish schools orbit ──
+  fishSchools.forEach(fs=>{
+    fs.position.x=fs.userData.cx+Math.sin(t*fs.userData.speed+fs.userData.phase)*5;
+    fs.position.z=fs.userData.cz+Math.cos(t*fs.userData.speed+fs.userData.phase)*4;
+    fs.rotation.y=t*fs.userData.speed*0.5;
+  });
+
+  renderer.render(scene,camera);
+}
+animate();
+
+// ─── MODAL LOGIC ────────────────────────────────────────────
+function openModal(id){
+  document.getElementById('modal-'+id).classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('active'));
+  document.body.style.overflow='';
+}
+
+// Clickable exp cards
+document.querySelectorAll('.exp-clickable').forEach(card=>{
+  card.addEventListener('click',()=>openModal(card.dataset.modal));
+});
+
+// Close on overlay background click
+document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+  overlay.addEventListener('click',e=>{
+    if(e.target===overlay||e.target.classList.contains('modal-water-bg')) closeModal();
+  });
+});
+
+// Close on Escape
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal()});
+document.getElementById('menuBtn').addEventListener('click',()=>{
+  const ids=['hero','experience','projects','about','workshops','contact'];
+  const idx=(currentSection+1)%ids.length;
+  document.getElementById(ids[idx]).scrollIntoView({behavior:'smooth'});
+});
+</script>
 </body>
 </html>
